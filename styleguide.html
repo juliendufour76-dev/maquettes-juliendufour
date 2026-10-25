@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Styleguide | Maquettes juliendufour.com</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/logos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/logos/favicon-180.png">
+<!-- Polices : Google Fonts dans les maquettes uniquement. En production, fichiers woff2 locaux (Elementor > Polices personnalisées). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/jd.css">
+<script src="assets/jd-maquettes.js" defer></script>
+<style>
+/* Mise en page du styleguide uniquement (non livrée). Tokens seulement. */
+.sg-nav{display:flex;flex-wrap:wrap;gap:8px}
+.sg-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--jd-border);border-radius:var(--jd-radius-pill);font:var(--jd-text-meta);color:var(--jd-ink-muted);text-decoration:none}
+.sg-nav a:hover{color:var(--jd-ink);border-color:var(--jd-border-strong)}
+.sg-block{display:grid;gap:var(--jd-space-6)}
+.sg-sub{font:var(--jd-text-label);letter-spacing:.2em;text-transform:uppercase;color:var(--jd-ink-subtle);margin-top:var(--jd-space-8)}
+.sg-row{display:flex;flex-wrap:wrap;gap:var(--jd-space-4);align-items:center}
+.sg-swatches{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.sg-swatch{border:1px solid var(--jd-border);background:var(--jd-surface-raised)}
+.sg-swatch__chip{height:72px;border-bottom:1px solid var(--jd-border)}
+.sg-swatch__body{padding:12px;display:grid;gap:2px}
+.sg-swatch__name{font:var(--jd-text-meta);color:var(--jd-ink)}
+.sg-swatch__val,.sg-swatch__use{font:400 12px/1.4 var(--jd-font-mono);color:var(--jd-ink-subtle)}
+.sg-type{display:grid;gap:4px;padding:20px 0;border-bottom:1px solid var(--jd-border)}
+.sg-type__spec{font:var(--jd-text-meta);color:var(--jd-ink-subtle)}
+.sg-states{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr))}
+.sg-state{display:grid;gap:10px;justify-items:start;padding:20px;border:1px solid var(--jd-border)}
+.sg-state>span:first-child{font:var(--jd-text-meta);color:var(--jd-ink-subtle)}
+.sg-hover.jd-btn--primary{background:var(--jd-ink);border-color:var(--jd-ink)}
+.sg-hover.jd-btn--secondary,.sg-hover.jd-btn--white{background:var(--jd-brand);border-color:var(--jd-brand);color:var(--jd-on-brand)}
+.sg-focus{outline:3px solid var(--jd-focus);outline-offset:3px}
+.sg-focus.jd-btn--primary{outline-color:var(--jd-focus-on-brand)}
+.sg-hover.jd-round-btn{border-color:var(--jd-brand);color:var(--jd-brand)}
+.sg-hover.jd-skill{border-color:var(--jd-x);background:var(--jd-surface-raised)}
+.sg-hover.jd-skill::before{width:100%}
+.sg-hover.jd-skill .jd-skill__mark{opacity:.28}
+.sg-hover.jd-skill .jd-pills{max-height:160px;opacity:1}
+.sg-focus-field{border-bottom-color:var(--jd-brand)!important;outline:3px solid var(--jd-focus);outline-offset:3px}
+.sg-demo{position:relative;overflow:hidden;min-height:240px;border:1px solid var(--jd-border);display:grid;place-items:center}
+.sg-demo .jd-bgword{top:50%;transform:translateY(-50%)}
+.sg-note{font:var(--jd-text-small);color:var(--jd-ink-subtle);max-width:72ch}
+</style>
+</head>
+<body class="jd-grain">
+<a class="jd-skip" href="#contenu">Aller au contenu</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M5 9h3v10H5zM6.5 4.5a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10.5 9h2.9v1.4c.4-.8 1.5-1.6 3.1-1.6 3.1 0 3.5 2 3.5 4.6V19h-3v-4.9c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><path d="M3.5 6.5h4l1.5-2h6l1.5 2h4v13h-17z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 8.5-2 5-5 2 2-5z" fill="currentColor"/></symbol>
+  <symbol id="i-sitemap" viewBox="0 0 24 24"><path d="M9.5 3.5h5v4h-5zM3.5 16.5h5v4h-5zM15.5 16.5h5v4h-5zM12 7.5v4.5M6 16.5V12h12v4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M14 4.5c3-1 5.5-1 5.5-1s0 2.5-1 5.5l-5.5 6-4-4zM9 11l-3.5.5L3.5 14l4 .5M13 15l-.5 3.5L10 20.5 9.5 16.5M6.5 17.5 4 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M6.5 16v-4M11 16V8M15.5 16v-6M20 4l-5 4-4-2-5 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.8 12 2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<!-- [HEADER] Elementor&nbsp;: modèle Theme Builder «&nbsp;En-tête&nbsp;»&nbsp;; conteneur flex (classe jd-header, position fixe, Effets de défilement > Collant), widget Titre «&nbsp;JD.&nbsp;» ou Logo du site, widget Menu (classe jd-nav), widget Bouton (classes jd-btn--primary jd-header__cta). Voir NOTES-elementor.md, «&nbsp;En-tête&nbsp;». -->
+<header class="jd-header" data-bloc="[HEADER]">
+  <a class="jd-logo" href="pages/index.html" aria-label="Julien Dufour, accueil">JD<span>.</span></a>
+  <nav class="jd-nav" id="jd-nav" aria-label="Menu principal">
+    <ul class="jd-nav__list">
+      <li class="jd-nav__item jd-nav__item--sub">
+        <a class="jd-nav__link" href="pages/expertises/index.html">Expertises <svg class="jd-nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+        <ul class="jd-nav__sub">
+          <li class="jd-x-seo"><a href="pages/expertises/consultant-seo/index.html">SEO</a></li>
+          <li class="jd-x-geo"><a href="pages/expertises/consultant-geo/index.html">GEO</a></li>
+          <li class="jd-x-sea"><a href="pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media</a></li>
+          <li class="jd-x-data"><a href="pages/expertises/expert-data/index.html">Tracking et data</a></li>
+          <li class="jd-x-mkt"><a href="pages/expertises/expert-marketing/index.html">Stratégie marketing digital</a></li>
+          <li class="jd-x-pm"><a href="pages/expertises/chef-de-projet/index.html">Pilotage de projet et no-code</a></li>
+        </ul>
+      </li>
+      <li class="jd-nav__item"><a class="jd-nav__link" href="pages/blog/index.html">Articles</a></li>
+      <li class="jd-nav__item"><a class="jd-nav__link" href="pages/a-propos/index.html">À propos</a></li>
+    </ul>
+  </nav>
+  <div class="jd-header__end">
+    <a class="jd-btn jd-btn--primary jd-header__cta" href="pages/contact/index.html">Me contacter</a>
+    <button class="jd-burger" type="button" aria-expanded="false" aria-controls="jd-nav" aria-label="Ouvrir le menu">
+      <svg class="jd-i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="jd-i-close" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </div>
+</header>
+<main id="contenu">
+
+<section class="jd-hero" data-bloc="[HERO]">
+  <div class="jd-container jd-hero__body">
+    <p class="jd-eyebrow jd-eyebrow--star">Design system · étape 4</p>
+    <h1 class="jd-h1">Styleguide <span class="jd-alt">juliendufour.com</span></h1>
+    <p class="jd-lead">Composants de <code>assets/jd.css</code>, préfixe <code>jd</code>, thème sombre unique. Couleurs&nbsp;: uniquement les tokens de <code>01-design-system/tokens.css</code>. Chaque composant a son équivalent Elementor dans <code>assets/jd-elementor.css</code> et <code>NOTES-elementor.md</code>.</p>
+    <nav class="sg-nav" aria-label="Sections du styleguide">
+      <a href="#couleurs">Couleurs</a><a href="#typo">Typographie</a><a href="#surtitres">Surtitres et étoile</a><a href="#boutons">Boutons</a><a href="#reperes">Chiffres et listes</a><a href="#cartes">Cartes</a><a href="#etapes">Étapes et parcours</a><a href="#articles">Articles</a><a href="#faq">FAQ et maillage</a><a href="#formulaire">Formulaire</a><a href="#motifs">Motifs</a><a href="#annotations">Annotations</a>
+    </nav>
+  </div>
+</section>
+
+<!-- COULEURS -->
+<section class="jd-section jd-section--line" id="couleurs">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Couleurs</h2>
+    <p class="sg-note">Contrastes WCAG calculés sur #050505 / #0D0D0D. Aucun texte sous #828282. #00FF41&nbsp;: articles uniquement, jamais à côté de #A8FF60.</p>
+    <p class="sg-sub">Surfaces</p>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-surface)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-surface</span><span class="sg-swatch__val">#050505 · jdbg</span><span class="sg-swatch__use">Fond de page</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-surface-raised)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-surface-raised</span><span class="sg-swatch__val">#0D0D0D · jdcard</span><span class="sg-swatch__use">Cartes, étapes, formulaire</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-surface-sunken)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-surface-sunken</span><span class="sg-swatch__val">#0A0A0A · jdsunken</span><span class="sg-swatch__use">Bandeau, cartes expertise</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-surface-code)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-surface-code</span><span class="sg-swatch__val">#111111 · jdcode</span><span class="sg-swatch__use">Code des articles</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-border-line)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-border-line</span><span class="sg-swatch__val">#222222 · jdline</span><span class="sg-swatch__use">Filets décoratifs</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-border-strong)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-border-strong</span><span class="sg-swatch__val">blanc 0,35 · jdborder2</span><span class="sg-swatch__use">Champs, contours (3:1)</span></div></div>
+    </div>
+    <p class="sg-sub">Encres et marque</p>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-ink)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-ink</span><span class="sg-swatch__val">#FFFFFF · 20,4:1</span><span class="sg-swatch__use">Titres, texte fort</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-ink-title-alt)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-ink-title-alt</span><span class="sg-swatch__val">#A1A1A1 · 7,9:1</span><span class="sg-swatch__use">2e ligne des titres</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-ink-muted)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-ink-muted</span><span class="sg-swatch__val">#9B9B9B · 7,3:1</span><span class="sg-swatch__use">Accroches, menu, texte</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-ink-subtle)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-ink-subtle</span><span class="sg-swatch__val">#828282 · 5,3:1</span><span class="sg-swatch__use">Minimum pour tout texte</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-brand)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-brand</span><span class="sg-swatch__val">#A8FF60 · 16,6:1</span><span class="sg-swatch__use">Accent, primaire, étoile, focus</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-accent-terminal)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-accent-terminal</span><span class="sg-swatch__val">#00FF41 · 14,9:1</span><span class="sg-swatch__use">Articles uniquement</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-danger)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">--jd-danger</span><span class="sg-swatch__val">#FF5C5C · 6,7:1</span><span class="sg-swatch__use">Erreurs (toujours avec un texte)</span></div></div>
+    </div>
+    <p class="sg-sub">Couleurs d'expertise (classe jd-x-*, variable --jd-x)</p>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-seo)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-seo</span><span class="sg-swatch__val">#00CC33 · 9,4:1</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-geo)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-geo</span><span class="sg-swatch__val">#FF5FD2 · 7,6:1</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-sea)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-sea</span><span class="sg-swatch__val">#FF8A2B · 8,7:1</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-data)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-data</span><span class="sg-swatch__val">#2B9BFF · 7,0:1</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-mkt)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-mkt</span><span class="sg-swatch__val">#C061FF · 6,2:1</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--jd-pm)"></div><div class="sg-swatch__body"><span class="sg-swatch__name">jd-x-pm</span><span class="sg-swatch__val">#2BE0C0 · 12,2:1</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHIE -->
+<section class="jd-section jd-section--line" id="typo">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Typographie</h2>
+    <div>
+      <div class="sg-type"><span class="sg-type__spec">jd-h1-xl · Space Grotesk 700 · 86 / 38 px · −0,04em (pages expertise, contact)</span><p class="jd-h1-xl">Consultant SEO <span class="jd-alt">audit et contenu</span></p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-h1 · clamp(38px, 5vw, 68px) · 1,02</span><p class="jd-h1"><span class="jd-accent">Julien Dufour,</span> chef de projet digital</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-h2 · clamp(32px, 4vw, 56px) · 1 · 2e ligne en jd-alt</span><p class="jd-h2">Six expertises, <span class="jd-alt">un seul pilotage</span></p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-h3 · clamp(18px, 1.6vw, 24px) · 700 (cartes)</span><p class="jd-h3">Tracking et data</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-h3-list · 18 px · 600 (listes, titres d'articles, FAQ)</span><p class="jd-h3-list">Chef de projet E-business, SEO SEA Data</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-stat__value · clamp(40px, 4vw, 56px)</span><p class="jd-stat__value" style="--jd-x:var(--jd-seo)">+400&nbsp;%</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-lead · Inter 16 / 1,7 · ink-muted</span><p class="jd-lead">Je pilote des projets web de bout en bout en faisant travailler ensemble le SEO, le GEO, Google Ads et la data.</p></div>
+      <div class="sg-type"><span class="sg-type__spec">body · Inter 16 / 1,6 · ink</span><p>Texte courant blanc, sur fond #050505.</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-small · Inter 14 / 1,6</span><p class="jd-small">Texte des cartes et des notes.</p></div>
+      <div class="sg-type"><span class="sg-type__spec">jd-meta · JetBrains Mono 12 · 0,1em · ink-subtle</span><p class="jd-meta">27 septembre 2026 · 6 min</p></div>
+      <div class="sg-type"><span class="sg-type__spec">lien de texte (jd-link) · souligné vert 0,3, survol vert</span><p class="jd-text"><span>Le parcours complet est sur la page <a href="pages/a-propos/index.html">à propos</a>.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SURTITRES ET ÉTOILE -->
+<section class="jd-section jd-section--line" id="surtitres">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Surtitres <span class="jd-alt">et étoile du design system</span></h2>
+    <p class="sg-note">L'étoile à 4 branches («&nbsp;✦&nbsp;» du site actuel) est dessinée par un masque SVG&nbsp;: même rendu quelle que soit la police. Couleur&nbsp;: #A8FF60 sur les surtitres, couleur d'expertise sur les puces (jd-list) et l'icône FAQ. Fichier seul&nbsp;: <code>assets/jd-etoile.svg</code>.</p>
+    <div class="sg-states">
+      <div class="sg-state"><span>jd-eyebrow--star (casse saisie)</span><p class="jd-eyebrow jd-eyebrow--star">Rouen · SEO · GEO · SEA · Data</p></div>
+      <div class="sg-state"><span>jd-eyebrow--num (capitales)</span><p class="jd-eyebrow jd-eyebrow--num">04 / Articles</p></div>
+      <div class="sg-state jd-x-geo"><span>jd-eyebrow--x + jd-x-geo</span><p class="jd-eyebrow jd-eyebrow--x">Expertise / <span class="jd-eyebrow__x">GEO</span></p></div>
+      <div class="sg-state"><span>jd-star, jd-star--lg, jd-star--x</span><div class="sg-row"><span class="jd-star"></span><span class="jd-star jd-star--lg"></span><span class="jd-star jd-star--lg jd-star--x jd-x-sea"></span><span class="jd-star jd-star--lg jd-star--x jd-x-data"></span></div></div>
+    </div>
+    <p class="sg-sub">Puces étoile (jd-list), couleur de la page</p>
+    <ul class="jd-list jd-x-pm">
+      <li><strong>Mesurer avant d'agir</strong> : pas d'action sans objectif et sans suivi fiable.</li>
+      <li><strong>Vérifier chaque livraison</strong> : contrôle qualité avant et après la mise en ligne.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BOUTONS -->
+<section class="jd-section jd-section--line" id="boutons">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Boutons</h2>
+    <p class="sg-note">Trois styles, 48 px de haut minimum, un seul primaire par bloc. Primaire&nbsp;: contact uniquement («&nbsp;Me contacter&nbsp;», «&nbsp;Échanger avec moi »). Focus&nbsp;: anneau 3 px vert décalé de 3 px, blanc autour du bouton vert.</p>
+    <div class="sg-states">
+      <div class="sg-state"><span>Primaire · repos</span><a class="jd-btn jd-btn--primary" href="pages/contact/index.html">Échanger avec moi</a></div>
+      <div class="sg-state"><span>Primaire · survol</span><span class="jd-btn jd-btn--primary sg-hover">Échanger avec moi</span></div>
+      <div class="sg-state"><span>Primaire · focus clavier</span><span class="jd-btn jd-btn--primary sg-focus">Échanger avec moi</span></div>
+      <div class="sg-state"><span>Secondaire · repos</span><a class="jd-btn jd-btn--secondary" href="pages/expertises/index.html">Voir mes expertises</a></div>
+      <div class="sg-state"><span>Secondaire · survol</span><span class="jd-btn jd-btn--secondary sg-hover">Voir mes expertises</span></div>
+      <div class="sg-state"><span>Secondaire · focus</span><span class="jd-btn jd-btn--secondary sg-focus">Voir mes expertises</span></div>
+      <div class="sg-state"><span>Blanc · repos</span><a class="jd-btn jd-btn--white" href="pages/blog/index.html">Tous les articles</a></div>
+      <div class="sg-state"><span>Blanc · survol</span><span class="jd-btn jd-btn--white sg-hover">Tous les articles</span></div>
+      <div class="sg-state"><span>Blanc · désactivé (envoi en cours)</span><button class="jd-btn jd-btn--white" type="button" disabled aria-busy="true">Envoi en cours…</button></div>
+      <div class="sg-state"><span>Lien fléché (jd-link-arrow)</span><a class="jd-link-arrow" href="pages/blog/index.html">Lire l'article <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <div class="sg-state"><span>Flèches de rail · repos / survol / inactive</span><div class="sg-row"><button class="jd-round-btn" type="button" aria-label="Précédent"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button><span class="jd-round-btn sg-hover"><svg aria-hidden="true"><use href="#i-arrow"/></svg></span><button class="jd-round-btn" type="button" disabled aria-label="Suivant"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+      <div class="sg-state"><span>Menu mobile (jd-burger, sous 1024 px)</span><span class="jd-burger" aria-hidden="true"><svg><use href="#i-menu"/></svg></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIFFRES ET LISTES -->
+<section class="jd-section jd-section--line" id="reperes">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Chiffres <span class="jd-alt">et listes</span></h2>
+    <p class="sg-note">Chiffres en texte statique (pas de compteur animé), mention «&nbsp;en agence&nbsp;» sous le chiffre. La valeur prend la couleur de la page (jd-x-*), le vert de marque par défaut.</p>
+    <ul class="jd-stats jd-stats--4 jd-x-sea">
+      <li class="jd-stat"><span class="jd-stat__value">4&nbsp;M€</span><span class="jd-stat__label">de budget régie géré</span><span class="jd-stat__ctx">en agence</span></li>
+      <li class="jd-stat"><span class="jd-stat__value">×10</span><span class="jd-stat__label">ROAS moyen</span><span class="jd-stat__ctx">en agence</span></li>
+      <li class="jd-stat"><span class="jd-stat__value">+100</span><span class="jd-stat__label">clients accompagnés</span><span class="jd-stat__ctx">en agence</span></li>
+      <li class="jd-stat jd-stat--text"><span class="jd-stat__value">Rouen</span><span class="jd-stat__label">basé à</span></li>
+    </ul>
+    <p class="sg-sub">«&nbsp;En bref&nbsp;» (jd-facts)</p>
+    <dl class="jd-facts">
+      <div class="jd-facts__row"><dt>Ce que je fais</dt><dd>Audit SEO technique, stratégie de contenu, netlinking et maillage interne.</dd></div>
+      <div class="jd-facts__row"><dt>Outils</dt><dd>Screaming Frog, Semrush, Ahrefs, Google Search Console.</dd></div>
+    </dl>
+    <p class="sg-sub">Liste encadrée (jd-rows) et tableau (jd-table)</p>
+    <div class="jd-split jd-split--even">
+      <ul class="jd-rows"><li><h3>Exploration</h3><p>robots.txt, sitemap XML, codes HTTP, chaînes de redirections.</p></li><li><h3>Indexation</h3><p>Balises canoniques, directives noindex, contenu dupliqué.</p></li></ul>
+      <table class="jd-table"><thead><tr><th scope="col">Domaine</th><th scope="col">Outils</th></tr></thead><tbody><tr><td data-label="Domaine">SEO</td><td data-label="Outils">Semrush, Screaming Frog, Ahrefs</td></tr><tr><td data-label="Domaine">CRM et emailing</td><td data-label="Outils">HubSpot, Mailchimp</td></tr></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- CARTES -->
+<section class="jd-section jd-section--line" id="cartes">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Cartes <span class="jd-alt">d'expertise</span></h2>
+    <p class="sg-note">Rayon 10, ratio 3/4 en desktop, carte entièrement cliquable. Les affiches de l'ancien site sont remplacées par le sigle de l'expertise en filigrane (décoratif)&nbsp;: aucune image de banque. Pastilles visibles au survol et au focus, toujours visibles sur écran tactile. 2e carte&nbsp;: état survol forcé.</p>
+    <ul class="jd-grid jd-grid--3">
+      <li class="jd-skill jd-x-geo"><span class="jd-skill__num">/02</span><span class="jd-skill__mark" aria-hidden="true">GEO</span><h3 class="jd-skill__title">GEO</h3><p class="jd-skill__text">La visibilité dans les réponses de ChatGPT, de Perplexity et des AI Overviews de Google.</p><ul class="jd-pills"><li>llms.txt</li><li>Données structurées</li></ul><a class="jd-link-arrow" href="pages/expertises/consultant-geo/index.html">Être visible dans les réponses des IA <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li class="jd-skill jd-x-data sg-hover"><span class="jd-skill__num">/04</span><span class="jd-skill__mark" aria-hidden="true">DATA</span><h3 class="jd-skill__title">Tracking et data</h3><p class="jd-skill__text">Plan de marquage, GA4, Google Tag Manager et tableaux de bord Looker Studio.</p><ul class="jd-pills"><li>GA4</li><li>Tag Manager</li><li>Looker Studio</li></ul><a class="jd-link-arrow" href="pages/expertises/expert-data/index.html">Tracking GA4 et data marketing <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li class="jd-skill jd-x-mkt"><span class="jd-skill__num">/05</span><span class="jd-skill__mark" aria-hidden="true">MKT</span><h3 class="jd-skill__title">Stratégie marketing digital</h3><p class="jd-skill__text">Audit de présence digitale, funnel d'acquisition, content marketing et email automation.</p><a class="jd-link-arrow" href="pages/expertises/expert-marketing/index.html">Stratégie marketing digital <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ÉTAPES ET PARCOURS -->
+<section class="jd-section jd-section--line" id="etapes">
+  <div class="jd-container sg-block" data-rail>
+    <h2 class="jd-h2">Étapes <span class="jd-alt">et parcours</span></h2>
+    <ol class="jd-rail" aria-label="Exemple d'étapes">
+      <li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-compass"/></svg></span><h3 class="jd-step__title">01. Stratégie</h3><p class="jd-step__text">Comprendre l'objectif, le public et la concurrence, puis choisir les leviers utiles.</p></li>
+      <li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-sitemap"/></svg></span><h3 class="jd-step__title">02. Architecture</h3><p class="jd-step__text">Organiser le site, ses pages et son maillage autour des intentions de recherche.</p></li>
+      <li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-rocket"/></svg></span><h3 class="jd-step__title">03. Acquisition</h3><p class="jd-step__text">Lancer les actions retenues dans un ordre de priorité clair.</p></li>
+      <li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3 class="jd-step__title">04. Data &amp; Optimisation</h3><p class="jd-step__text">Mesurer, lire les résultats, puis ajuster.</p></li>
+      <li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><h3 class="jd-step__title">05. Quality Assurance</h3><p class="jd-step__text">Vérifier chaque livraison avant et après la mise en ligne.</p></li>
+    </ol>
+    <div class="jd-rail__nav">
+      <button class="jd-round-btn" type="button" data-rail-prev aria-label="Étape précédente"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+      <button class="jd-round-btn" type="button" data-rail-next aria-label="Étape suivante"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    </div>
+    <p class="sg-sub">Lignes d'expérience (jd-exp)</p>
+    <ol class="jd-exp">
+      <li class="jd-exp__row"><h3 class="jd-exp__title">Traffic Manager</h3><p class="jd-exp__org">Powertrafic by PumpUp · Alternance</p><p class="jd-exp__place">Mont-Saint-Aignan · Sur site</p><p class="jd-exp__date">Sept. 2023 à août 2024</p></li>
+      <li class="jd-exp__row"><h3 class="jd-exp__title">Chef de projet digital et marketing</h3><p class="jd-exp__org">NACHOS · Alternance</p><p class="jd-exp__place">Rouen</p><p class="jd-exp__date">Janv. 2022 à sept. 2023</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="jd-section jd-section--line" id="articles">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Cartes <span class="jd-alt">d'articles</span></h2>
+    <p class="sg-note">Filet #222, rayon 0, carte entièrement cliquable (le lien du titre couvre la carte), badge de catégorie cliquable au-dessus. Le registre «&nbsp;terminal&nbsp;» (#00FF41) reste dans le corps des articles.</p>
+    <ul class="jd-posts">
+      <li class="jd-post"><div class="jd-post__meta"><a class="jd-cat" href="pages/blog/index.html">Catégorie</a><span class="jd-post__date">27 septembre 2026</span></div><h3 class="jd-post__title"><a href="pages/blog/index.html">Impulsion IA 2027&nbsp;: le plan stratégique pour transformer le travail et les compétences</a></h3><p class="jd-post__excerpt"><span class="jd-todo">[Extrait de l'article]</span></p><span class="jd-post__more" aria-hidden="true">Lire l'article <svg><use href="#i-arrow"/></svg></span></li>
+      <li class="jd-post"><div class="jd-post__meta"><a class="jd-cat" href="pages/blog/index.html">Catégorie</a><span class="jd-post__date">20 septembre 2026</span></div><h3 class="jd-post__title"><a href="pages/blog/index.html">GPT-Image 2.5 vs Nano Banana 2&nbsp;: le duel des modèles IA de septembre 2026</a></h3><p class="jd-post__excerpt"><span class="jd-todo">[Extrait de l'article]</span></p><span class="jd-post__more" aria-hidden="true">Lire l'article <svg><use href="#i-arrow"/></svg></span></li>
+    </ul>
+    <p class="sg-sub">Encadré auteur (jd-box jd-author)</p>
+    <div class="jd-box jd-author" style="max-width:520px">
+      <div class="jd-ph"><svg aria-hidden="true"><use href="#i-photo"/></svg></div>
+      <div><p class="jd-h3-list">Julien Dufour</p><p class="jd-small">Chef de projet digital augmenté par IA, à Rouen. <a class="jd-link" href="pages/a-propos/index.html">À propos</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ET MAILLAGE -->
+<section class="jd-section jd-section--line" id="faq">
+  <div class="jd-container jd-split">
+    <div class="sg-block">
+      <h2 class="jd-h2">FAQ</h2>
+      <div class="jd-faq jd-x-seo">
+        <details class="jd-faq__item" open><summary class="jd-faq__q"><h3>Qu'est-ce qu'un cocon sémantique&nbsp;?</h3></summary><div class="jd-faq__a"><p>C'est une organisation des contenus par thème. Une page mère traite un sujet large, des pages filles traitent chacune une question précise.</p></div></details>
+        <details class="jd-faq__item"><summary class="jd-faq__q"><h3>Les backlinks comptent-ils encore pour le référencement&nbsp;?</h3></summary><div class="jd-faq__a"><p>Oui. Les liens venant d'autres sites restent un signal d'autorité pour Google, mais leur qualité compte plus que leur nombre.</p></div></details>
+      </div>
+    </div>
+    <div class="sg-block">
+      <h2 class="jd-h3">Pour aller plus loin</h2>
+      <ul class="jd-links">
+        <li class="jd-x-geo"><a href="pages/expertises/consultant-geo/index.html">GEO&nbsp;: être visible dans les réponses des IA <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li class="jd-x-data"><a href="pages/expertises/expert-data/index.html">Tracking et data <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      </ul>
+      <p class="sg-sub">Coordonnées (jd-contact-info)</p>
+      <dl class="jd-contact-info">
+        <div class="jd-contact-info__row"><dt>Email</dt><dd><a href="mailto:contact@juliendufour.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>contact@juliendufour.com</a></dd></div>
+        <div class="jd-contact-info__row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/julien-dufour76/"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>/in/julien-dufour76</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULAIRE -->
+<section class="jd-section jd-section--line" id="formulaire">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Formulaire</h2>
+    <p class="sg-note">Étiquettes mono #828282 toujours visibles, champs soulignés blanc 0,35 (3:1), soulignement vert au focus + anneau. Erreur&nbsp;: texte sous le champ en #FF5C5C avec pictogramme «&nbsp;!&nbsp;», champ en aria-invalid, relié par aria-describedby. Le formulaire interactif est sur le <a class="jd-link" href="pages/contact/index.html">gabarit contact</a>.</p>
+    <div class="jd-split jd-split--even">
+      <div class="jd-form-box">
+        <div class="jd-form">
+          <div class="jd-field"><label for="sg-1">Nom <span class="jd-req" aria-hidden="true">*</span></label><input id="sg-1" type="text" placeholder="Prénom Nom"></div>
+          <div class="jd-field"><label for="sg-2">Email (focus)</label><input id="sg-2" class="sg-focus-field" type="email" value="julien@" aria-describedby="sg-2-help"><p class="jd-field__help" id="sg-2-help">Pour vous répondre, rien d'autre.</p></div>
+          <div class="jd-field jd-field--error"><label for="sg-3">Email (erreur)</label><input id="sg-3" type="email" value="julien@" aria-invalid="true" aria-describedby="sg-3-err"><p class="jd-field__error" id="sg-3-err">Indiquez une adresse email valide, par exemple vous@exemple.fr.</p></div>
+          <div class="jd-field"><label for="sg-4">Sujet</label><div class="jd-select"><select id="sg-4"><option>Opportunité professionnelle / recrutement</option></select></div></div>
+          <div class="jd-field jd-field--full"><label for="sg-5">Message</label><textarea id="sg-5" rows="3" placeholder="Votre question ou votre proposition, en quelques lignes"></textarea></div>
+          <div class="jd-field jd-field--full jd-field--error"><label class="jd-check" for="sg-6"><input id="sg-6" type="checkbox" aria-invalid="true" aria-describedby="sg-6-err"><span>J'accepte que mes données soient utilisées pour répondre à ma demande.</span></label><p class="jd-field__error" id="sg-6-err">Cochez la case pour que je puisse traiter votre message.</p></div>
+          <button class="jd-btn jd-btn--white jd-btn--block" type="button">Envoyer le message</button>
+        </div>
+      </div>
+      <div class="jd-stack">
+        <div class="jd-form__msg jd-form__msg--success" role="status"><strong>Message envoyé</strong><p>Merci, votre message est bien parti. Un accusé de réception vient de vous être envoyé.</p></div>
+        <div class="jd-form__msg jd-form__msg--error"><strong>Échec de l'envoi</strong><p>Le message n'a pas pu être envoyé. Réessayez dans un instant ou écrivez-moi directement à contact@juliendufour.com.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTIFS -->
+<section class="jd-section jd-section--line" id="motifs">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Motifs</h2>
+    <p class="sg-note">Grain SVG à 3&nbsp;% (classe jd-grain sur body, fichier assets/jd-grain.svg), badge rotatif, mot géant à 4&nbsp;%, bandeau d'outils, portrait N&amp;B. Tous décoratifs (aria-hidden) sauf la 1re liste du bandeau. Arrêtés si prefers-reduced-motion.</p>
+    <div class="jd-split jd-split--even">
+      <div class="sg-demo"><p class="jd-bgword" aria-hidden="true">Contact</p><div class="jd-badge-ring jd-badge-ring--static" aria-hidden="true"><svg class="jd-badge-ring__text" viewBox="0 0 100 100"><defs><path id="ring-sg" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text><textPath href="#ring-sg" textLength="236" lengthAdjust="spacing">Let's talk • Let's talk • </textPath></text></svg><svg class="jd-badge-ring__arrow"><use href="#i-arrow-ur"/></svg></div></div>
+      <div class="jd-portrait" style="max-width:300px"><div class="jd-ph"><div><svg aria-hidden="true"><use href="#i-photo"/></svg><span class="jd-ph__title">Photo à fournir</span><span class="jd-ph__alt">Julien Dufour, chef de projet digital augmenté par IA, à Rouen</span></div></div></div>
+    </div>
+  </div>
+  <div class="jd-marquee" style="margin-top:48px">
+    <div class="jd-marquee-track">
+      <ul aria-label="Outils"><li>Semrush</li><li>Screaming Frog</li><li>Ahrefs</li><li>Search Console</li><li>Analytics 4</li><li>Tag Manager</li><li>Looker Studio</li><li>Python</li></ul>
+      <ul aria-hidden="true"><li>Semrush</li><li>Screaming Frog</li><li>Ahrefs</li><li>Search Console</li><li>Analytics 4</li><li>Tag Manager</li><li>Looker Studio</li><li>Python</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ANNOTATIONS -->
+<section class="jd-section jd-section--line" id="annotations">
+  <div class="jd-container sg-block">
+    <h2 class="jd-h2">Annotations <span class="jd-alt">de maquette</span></h2>
+    <p class="sg-note">Ne partent pas en production&nbsp;: repère <code>jd-todo</code>, bandeau <code>jd-review-banner</code>, zone <code>jd-ph</code>.</p>
+    <p class="jd-text"><span>Texte avec un repère <span class="jd-todo">[À FOURNIR&nbsp;: délai de réponse habituel]</span> à compléter.</span></p>
+    <div class="jd-review-banner" style="margin:0;width:100%" role="note"><strong>Page à confirmer.</strong> Exemple de bandeau affiché en haut des pages dont le contenu attend une validation.</div>
+    <div class="jd-ph jd-ph--wide" style="max-width:520px"><div><svg aria-hidden="true"><use href="#i-photo"/></svg><span class="jd-ph__title">Photo à fournir</span><span class="jd-ph__alt">Rapport d'exploration Screaming Frog lors d'un audit SEO technique</span></div></div>
+  </div>
+</section>
+
+</main>
+<!-- [FOOTER] Elementor&nbsp;: modèle Theme Builder «&nbsp;Pied de page&nbsp;»&nbsp;; conteneur (classe jd-footer) > conteneur grille 4 colonnes (jd-footer__grid). Colonne 1&nbsp;: Titre «&nbsp;JD.&nbsp;» + Éditeur de texte + Bouton (jd-btn--secondary) LinkedIn. Colonnes 2 à 4&nbsp;: Titre (jd-footer__title) + Liste d'icônes sans icône (jd-footer__list). Ligne basse&nbsp;: conteneur flex (jd-footer__bottom). -->
+<footer class="jd-footer" data-bloc="[FOOTER]">
+  <div class="jd-container">
+    <div class="jd-footer__grid">
+      <div class="jd-footer__id">
+        <a class="jd-logo" href="pages/index.html" aria-label="Julien Dufour, accueil">JD<span>.</span></a>
+        <p>Julien Dufour, chef de projet digital augmenté par IA, à Rouen.</p>
+        <a class="jd-btn jd-btn--secondary" href="https://www.linkedin.com/in/julien-dufour76/" rel="me noopener">LinkedIn</a>
+      </div>
+      <nav aria-labelledby="ft-exp">
+        <p class="jd-footer__title" id="ft-exp">Expertises</p>
+        <ul class="jd-footer__list">
+          <li><a href="pages/expertises/consultant-seo/index.html">SEO</a></li>
+          <li><a href="pages/expertises/consultant-geo/index.html">GEO</a></li>
+          <li><a href="pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media</a></li>
+          <li><a href="pages/expertises/expert-data/index.html">Tracking et data</a></li>
+          <li><a href="pages/expertises/expert-marketing/index.html">Stratégie marketing digital</a></li>
+          <li><a href="pages/expertises/chef-de-projet/index.html">Pilotage de projet et no-code</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="ft-res">
+        <p class="jd-footer__title" id="ft-res">Ressources</p>
+        <ul class="jd-footer__list">
+          <li><a href="pages/blog/index.html">Articles</a></li>
+          <li><a href="pages/a-propos/index.html">À propos</a></li>
+          <li><a href="pages/contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="jd-footer__title">Contact</p>
+        <ul class="jd-footer__list">
+          <li><a href="mailto:contact@juliendufour.com">contact@juliendufour.com</a></li>
+          <li><a href="https://www.linkedin.com/in/julien-dufour76/" rel="me noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="jd-footer__bottom">
+      <ul class="jd-footer__legal">
+        <li><a href="pages/mentions-legales/index.html">Mentions légales</a></li>
+        <li><a href="pages/politique-de-confidentialite/index.html">Politique de confidentialité</a></li>
+      </ul>
+      <p class="jd-footer__copy">© 2026 Julien Dufour. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

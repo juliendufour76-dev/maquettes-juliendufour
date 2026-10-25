@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracking GA4 et data marketing | Julien Dufour</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="../../../assets/logos/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/logos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/logos/favicon-180.png">
+<!-- Polices : Google Fonts dans les maquettes uniquement. En production, fichiers woff2 locaux (Elementor > Polices personnalisées). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/jd.css">
+<script src="../../../assets/jd-maquettes.js" defer></script>
+<meta name="description" content="Plan de marquage, GA4 et Google Tag Manager, dashboards Looker Studio, BigQuery et automatisation des reportings : la pratique data de Julien Dufour.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://juliendufour.com/expertises/expert-data/#webpage",
+   "url": "https://juliendufour.com/expertises/expert-data/",
+   "name": "Tracking GA4 et data marketing | Julien Dufour",
+   "description": "Plan de marquage, GA4 et Google Tag Manager, dashboards Looker Studio, BigQuery et automatisation des reportings : la pratique data de Julien Dufour.",
+   "inLanguage": "fr-FR",
+   "isPartOf": {
+    "@id": "https://juliendufour.com/#website"
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Web analytics"
+   },
+   "author": {
+    "@id": "https://juliendufour.com/#julien-dufour"
+   },
+   "breadcrumb": {
+    "@id": "https://juliendufour.com/expertises/expert-data/#breadcrumb"
+   }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://juliendufour.com/#julien-dufour",
+   "name": "Julien Dufour",
+   "jobTitle": "Chef de projet digital augmenté par IA",
+   "url": "https://juliendufour.com/",
+   "sameAs": [
+    "https://www.linkedin.com/in/julien-dufour76/"
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://juliendufour.com/expertises/expert-data/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://juliendufour.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Expertises",
+     "item": "https://juliendufour.com/expertises/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Tracking et data",
+     "item": "https://juliendufour.com/expertises/expert-data/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://juliendufour.com/expertises/expert-data/#faq",
+   "isPartOf": {
+    "@id": "https://juliendufour.com/expertises/expert-data/#webpage"
+   },
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce qu'un plan de marquage GA4 ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "C'est le document de référence du tracking. Pour chaque action à mesurer (envoi de formulaire, clic sur un email, achat), il indique le nom de l'événement GA4, ses paramètres, la règle de déclenchement dans Google Tag Manager et l'objectif qu'il sert. Il évite les doublons et les noms incohérents, et permet à un développeur ou à un nouvel analyste de comprendre le tracking sans tout redécouvrir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelle différence entre GA4 et Google Tag Manager ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "GA4 est l'outil d'analyse : il reçoit les événements, les stocke et produit les rapports. Google Tag Manager est un gestionnaire de balises : il décide quand envoyer quelle donnée, à GA4 comme à d'autres outils (Google Ads, Meta, etc.). On peut installer GA4 sans GTM, mais GTM rend le tracking plus simple à faire évoluer, à tester et à documenter sans toucher au code du site."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment le consentement RGPD change-t-il les données GA4 ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Quand un visiteur refuse les cookies de mesure, GA4 ne peut pas le suivre comme d'habitude. Avec le mode de consentement de Google, les balises s'adaptent au choix du visiteur et GA4 peut, sous conditions de volume, modéliser une partie des données manquantes. Il faut donc s'attendre à des chiffres inférieurs aux visites réelles, et documenter la configuration choisie avec la plateforme de consentement."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Pourquoi GA4, Google Ads et la Search Console n'affichent-ils pas les mêmes chiffres ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Parce qu'ils ne mesurent pas la même chose. La Search Console compte des clics dans les résultats de Google, GA4 des sessions sur le site, Google Ads des clics et des conversions selon son propre modèle d'attribution et sa propre fenêtre. Le consentement, les bloqueurs et les fuseaux horaires creusent encore les écarts. Un écart stable n'est pas une erreur ; un écart qui change brutalement mérite un audit."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il connecter GA4 à BigQuery ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "C'est utile dès qu'on veut conserver un historique long, croiser GA4 avec d'autres sources ou interroger les événements bruts en SQL. L'export est disponible dans les propriétés GA4 standards, avec des limites de volume pour l'export quotidien ; le stockage et les requêtes relèvent de la facturation Google Cloud au-delà des quotas gratuits. Pour un petit site, les rapports de GA4 et Looker Studio suffisent souvent."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body class="jd-grain jd-x-data">
+<a class="jd-skip" href="#contenu">Aller au contenu</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M5 9h3v10H5zM6.5 4.5a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10.5 9h2.9v1.4c.4-.8 1.5-1.6 3.1-1.6 3.1 0 3.5 2 3.5 4.6V19h-3v-4.9c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><path d="M3.5 6.5h4l1.5-2h6l1.5 2h4v13h-17z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 8.5-2 5-5 2 2-5z" fill="currentColor"/></symbol>
+  <symbol id="i-sitemap" viewBox="0 0 24 24"><path d="M9.5 3.5h5v4h-5zM3.5 16.5h5v4h-5zM15.5 16.5h5v4h-5zM12 7.5v4.5M6 16.5V12h12v4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M14 4.5c3-1 5.5-1 5.5-1s0 2.5-1 5.5l-5.5 6-4-4zM9 11l-3.5.5L3.5 14l4 .5M13 15l-.5 3.5L10 20.5 9.5 16.5M6.5 17.5 4 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M6.5 16v-4M11 16V8M15.5 16v-6M20 4l-5 4-4-2-5 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.8 12 2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<!-- [HEADER] Elementor&nbsp;: modèle Theme Builder «&nbsp;En-tête&nbsp;»&nbsp;; conteneur flex (classe jd-header, position fixe, Effets de défilement > Collant), widget Titre «&nbsp;JD.&nbsp;» ou Logo du site, widget Menu (classe jd-nav), widget Bouton (classes jd-btn--primary jd-header__cta). Voir NOTES-elementor.md, «&nbsp;En-tête&nbsp;». -->
+<header class="jd-header" data-bloc="[HEADER]">
+  <a class="jd-logo" href="../../../pages/index.html" aria-label="Julien Dufour, accueil">JD<span>.</span></a>
+  <nav class="jd-nav" id="jd-nav" aria-label="Menu principal">
+    <ul class="jd-nav__list">
+      <li class="jd-nav__item jd-nav__item--sub is-current">
+        <a class="jd-nav__link" href="../../../pages/expertises/index.html">Expertises <svg class="jd-nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+        <ul class="jd-nav__sub">
+          <li class="jd-x-seo"><a href="../../../pages/expertises/consultant-seo/index.html">SEO</a></li>
+          <li class="jd-x-geo"><a href="../../../pages/expertises/consultant-geo/index.html">GEO</a></li>
+          <li class="jd-x-sea"><a href="../../../pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media</a></li>
+          <li class="jd-x-data"><a href="../../../pages/expertises/expert-data/index.html" aria-current="page">Tracking et data</a></li>
+          <li class="jd-x-mkt"><a href="../../../pages/expertises/expert-marketing/index.html">Stratégie marketing digital</a></li>
+          <li class="jd-x-pm"><a href="../../../pages/expertises/chef-de-projet/index.html">Pilotage de projet et no-code</a></li>
+        </ul>
+      </li>
+      <li class="jd-nav__item"><a class="jd-nav__link" href="../../../pages/blog/index.html">Articles</a></li>
+      <li class="jd-nav__item"><a class="jd-nav__link" href="../../../pages/a-propos/index.html">À propos</a></li>
+    </ul>
+  </nav>
+  <div class="jd-header__end">
+    <a class="jd-btn jd-btn--primary jd-header__cta" href="../../../pages/contact/index.html">Me contacter</a>
+    <button class="jd-burger" type="button" aria-expanded="false" aria-controls="jd-nav" aria-label="Ouvrir le menu">
+      <svg class="jd-i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="jd-i-close" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </div>
+</header>
+<main id="contenu"><div class="jd-review-banner" role="note"><strong>Contenu à confirmer.</strong> Des points de cette page attendent la validation de Julien (voir les commentaires du fichier de contenu).</div>
+<section class="jd-hero jd-hero--x" data-bloc="[HERO]"><div class="jd-container jd-hero__grid jd-hero__grid--text-first"><div class="jd-hero__body"><nav class="jd-breadcrumb" aria-label="Fil d'Ariane"><ol><li><a href="../../../pages/index.html">Accueil</a></li><li><a href="../../../pages/expertises/index.html">Expertises</a></li><li><span aria-current="page">Tracking et data</span></li></ol></nav><p class="jd-eyebrow jd-eyebrow--x">Expertise / <span class="jd-eyebrow__x">Tracking et data</span></p><h1 class="jd-h1-xl">Tracking, GA4 et data marketing&nbsp;: <span class="jd-alt">des données fiables pour décider</span></h1><span class="jd-hero__rule" aria-hidden="true"></span><p class="jd-lead">Je suis Julien Dufour, chef de projet digital augmenté par IA à Rouen. Côté data, je conçois le tracking GA4 d'un site (plan de marquage, Google Tag Manager, consentement), puis les tableaux de bord Looker Studio et les reportings automatisés. Le but&nbsp;: des chiffres justes, lus par les bonnes personnes, au bon moment.</p><div class="jd-actions"><a class="jd-btn jd-btn--primary" href="../../../pages/contact/index.html">Échanger avec moi</a><a class="jd-btn jd-btn--secondary" href="https://www.linkedin.com/in/julien-dufour76/" rel="me noopener">Voir mon profil LinkedIn</a></div></div><div class="jd-hero__media"><div class="jd-ph jd-ph--wide"><div><svg aria-hidden="true"><use href="#i-photo"/></svg><span class="jd-ph__title">Photo à fournir</span><span class="jd-ph__alt">Tableau de bord Looker Studio de suivi des conversions, données anonymisées<br><span class="jd-todo">[À FOURNIR&nbsp;: capture réelle anonymisée, avec l'accord de l'entreprise concernée]</span></span></div></div></div></div></section>
+<section class="jd-section jd-section--tight" data-bloc="[REASSURANCE]" aria-label="Repères"><div class="jd-container"><ul class="jd-stats jd-stats--4"><li class="jd-stat"><span class="jd-stat__value">-60&nbsp;%</span><span class="jd-stat__label">de temps d'analyse</span><span class="jd-stat__ctx">en agence</span></li><li class="jd-stat jd-stat--note"><span class="jd-stat__label">Dans le marketing digital depuis 2022</span></li><li class="jd-stat jd-stat--note"><span class="jd-stat__label">GA4, Google Tag Manager, Looker Studio, BigQuery, SQL, Python</span></li><li class="jd-stat jd-stat--note"><span class="jd-stat__label">Basé à Rouen</span></li></ul></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container jd-split"><div class="jd-section__head jd-sticky"><h2 class="jd-h2">En bref</h2></div><div class="jd-section__body"><dl class="jd-facts"><div class="jd-facts__row"><dt>Ce que je pratique</dt><dd>plan de marquage, configuration GA4 et Google Tag Manager, audit de tracking, dashboards, export et requêtes BigQuery, automatisation des reportings.</dd></div><div class="jd-facts__row"><dt>Outils</dt><dd>GA4, Google Tag Manager, Search Console, Looker Studio, BigQuery et SQL, Python et API. Power BI et Tableau&nbsp;: <span class="jd-todo">[À FOURNIR&nbsp;: confirmer la pratique réelle de Power BI et de Tableau]</span>.</dd></div><div class="jd-facts__row"><dt>Expérience</dt><dd>dans le marketing digital depuis 2022, dont un poste de Chef de projet E-business, SEO SEA Data chez Powertrafic by PumpUp, de septembre 2024 à mars 2025.</dd></div><div class="jd-facts__row"><dt>Où</dt><dd>Rouen.</dd></div></dl></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container jd-split"><div class="jd-section__head jd-sticky"><h2 class="jd-h2">Pourquoi le tracking GA4 conditionne toutes les décisions</h2></div><div class="jd-section__body"><div class="jd-text"><p>Le tracking GA4 est la couche qui enregistre ce que font les visiteurs d'un site&nbsp;: pages vues, clics, formulaires envoyés, achats. Si cette couche est fausse, tout ce qui en dépend l'est aussi&nbsp;: le calcul du coût par acquisition, l'arbitrage entre SEO et publicité, le choix des pages à retravailler.</p><p>Les erreurs les plus fréquentes sont banales et coûteuses&nbsp;:</p></div>
+<ul class="jd-list"><li>une conversion comptée deux fois, parce que la balise se déclenche au chargement de la page de remerciement et au clic&nbsp;;</li><li>des événements nommés différemment d'un site à l'autre, impossibles à comparer&nbsp;;</li><li>un bandeau de consentement qui bloque tout, ou au contraire rien&nbsp;;</li><li>des paramètres UTM incohérents, qui envoient les campagnes dans «&nbsp;Direct&nbsp;» ou «&nbsp;Unassigned&nbsp;»&nbsp;;</li><li>des propriétés GA4 sans responsable clair, où personne ne sait quelle version du tracking est en ligne.</li></ul>
+<div class="jd-text"><p>Avant de produire un graphique, je vérifie donc que la donnée qui l'alimente est juste.</p></div></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container"><div class="jd-section__head"><h2 class="jd-h2">Le plan de marquage&nbsp;: <span class="jd-alt">la base d'un tracking GA4 propre</span></h2></div><div class="jd-section__body"><div class="jd-text"><p>Un plan de marquage est le document qui liste, pour chaque action à mesurer, le nom de l'événement GA4, ses paramètres, la règle de déclenchement dans Google Tag Manager et l'objectif métier associé. Il sert de contrat entre le marketing, les développeurs et la personne qui lit les rapports.</p></div>
+<div data-rail><ol class="jd-rail" aria-label="Le plan de marquage&nbsp;: la base d&#x27;un tracking GA4 propre"><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-compass"/></svg></span><h3 class="jd-step__title">01. Objectifs</h3><p class="jd-step__text">je pars des questions à trancher (quelles pages génèrent des contacts, quels canaux convertissent), pas de la liste des clics possibles.</p></li><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-sitemap"/></svg></span><h3 class="jd-step__title">02. Inventaire</h3><p class="jd-step__text">événements recommandés par GA4 quand ils existent (<code>generate_lead</code>, <code>purchase</code>…), événements personnalisés sinon, avec une convention de nommage unique.</p></li><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-rocket"/></svg></span><h3 class="jd-step__title">03. Implémentation dans Google Tag Manager</h3><p class="jd-step__text">balises, déclencheurs, variables, couche de données (dataLayer) quand le site le permet.</p></li><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3 class="jd-step__title">04. Consentement</h3><p class="jd-step__text">intégration avec la plateforme de gestion du consentement et le mode de consentement de Google.</p></li><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><h3 class="jd-step__title">05. Recette</h3><p class="jd-step__text">mode aperçu de GTM, DebugView de GA4, contrôle des conversions de bout en bout.</p></li><li class="jd-step"><span class="jd-step__icon"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span><h3 class="jd-step__title">06. Documentation</h3><p class="jd-step__text">le plan de marquage reste à jour et versionné&nbsp;; chaque modification du conteneur GTM est décrite.</p></li></ol><div class="jd-rail__nav"><button class="jd-round-btn" type="button" data-rail-prev aria-label="Étape précédente"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button><button class="jd-round-btn" type="button" data-rail-next aria-label="Étape suivante"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container"><div class="jd-section__head"><h2 class="jd-h2">Dashboards Looker Studio&nbsp;: <span class="jd-alt">lire la donnée sans la chercher</span></h2></div><div class="jd-section__body"><div class="jd-text"><p>Un tableau de bord utile répond à une question récurrente, pour un lecteur précis. Je construis les dashboards Looker Studio à partir de GA4, de la Search Console et des plateformes publicitaires, avec peu d'indicateurs par page et une définition écrite de chacun.</p></div>
+<ul class="jd-grid jd-grid--4"><li class="jd-card"><h3 class="jd-card__title">Pilotage</h3><p class="jd-card__text">une page de synthèse, les tendances et les écarts, pour décider en quelques minutes.</p></li><li class="jd-card"><h3 class="jd-card__title">Acquisition</h3><p class="jd-card__text">sessions et conversions par canal, avec une règle de regroupement des sources documentée.</p></li><li class="jd-card"><h3 class="jd-card__title">SEO</h3><p class="jd-card__text">requêtes, pages et taux de clic issus de la Search Console, rapprochés des conversions GA4. Voir mon expertise <a href="../../../pages/expertises/consultant-seo/index.html">SEO</a>.</p></li><li class="jd-card"><h3 class="jd-card__title">Publicité</h3><p class="jd-card__text">coûts et conversions des campagnes, à côté des données GA4. Le pilotage des campagnes relève de mon expertise <a href="../../../pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media</a>.</p></li></ul></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container jd-split"><div class="jd-section__head jd-sticky"><h2 class="jd-h2">BigQuery, SQL et Python&nbsp;: <span class="jd-alt">quand les rapports standards ne suffisent plus</span></h2></div><div class="jd-section__body"><div class="jd-text"><p>L'interface de GA4 agrège ou seuille certaines données, et ses explorations ont une durée de conservation limitée. L'export de GA4 vers BigQuery donne accès aux événements bruts, interrogeables en SQL, sans cette limite de conservation.</p><p>Je m'en sers pour trois usages&nbsp;:</p></div>
+<ul class="jd-list"><li>croiser des sources (GA4, Search Console, CRM, coûts publicitaires) dans une même table&nbsp;;</li><li>conserver un historique au-delà de la durée de rétention de GA4&nbsp;;</li><li>alimenter des dashboards plus rapides et plus fiables que des connecteurs empilés.</li></ul>
+<div class="jd-text"><p>Pour les tâches répétitives, j'écris des scripts Python qui interrogent des API (Search Console, GA4) et produisent les reportings hebdomadaires ou mensuels sans copier-coller. J'en décris un exemple dans l'article <a href="../../../pages/blog/index.html">Data-driven SEO&nbsp;: utiliser Python pour automatiser vos analyses</a>. L'IA m'aide à écrire et à relire ces requêtes et ces scripts plus vite&nbsp;; la vérification des résultats reste humaine.</p></div></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[SECTION]"><div class="jd-container jd-split"><div class="jd-section__head jd-sticky"><h2 class="jd-h2">Mesurer aussi le trafic venu des assistants IA</h2></div><div class="jd-section__body"><div class="jd-text"><p>Une partie des visites arrive désormais depuis des assistants comme ChatGPT ou Perplexity. Dans GA4, ces visites apparaissent comme des sites référents&nbsp;: je crée un groupe de canaux dédié pour les isoler et suivre leurs conversions. Cette mesure complète le travail de visibilité décrit sur ma page <a href="../../../pages/expertises/consultant-geo/index.html">GEO</a>.</p></div></div></div></section>
+<section class="jd-section jd-section--line" data-bloc="[FAQ]"><div class="jd-container jd-split"><div class="jd-section__head jd-sticky"><p class="jd-eyebrow jd-eyebrow--star">FAQ</p><h2 class="jd-h2">Questions fréquentes</h2></div><div class="jd-faq"><details class="jd-faq__item" open><summary class="jd-faq__q"><h3>Qu'est-ce qu'un plan de marquage GA4&nbsp;?</h3></summary><div class="jd-faq__a"><p>C'est le document de référence du tracking. Pour chaque action à mesurer (envoi de formulaire, clic sur un email, achat), il indique le nom de l'événement GA4, ses paramètres, la règle de déclenchement dans Google Tag Manager et l'objectif qu'il sert. Il évite les doublons et les noms incohérents, et permet à un développeur ou à un nouvel analyste de comprendre le tracking sans tout redécouvrir.</p></div></details><details class="jd-faq__item"><summary class="jd-faq__q"><h3>Quelle différence entre GA4 et Google Tag Manager&nbsp;?</h3></summary><div class="jd-faq__a"><p>GA4 est l'outil d'analyse&nbsp;: il reçoit les événements, les stocke et produit les rapports. Google Tag Manager est un gestionnaire de balises&nbsp;: il décide quand envoyer quelle donnée, à GA4 comme à d'autres outils (Google Ads, Meta, etc.). On peut installer GA4 sans GTM, mais GTM rend le tracking plus simple à faire évoluer, à tester et à documenter sans toucher au code du site.</p></div></details><details class="jd-faq__item"><summary class="jd-faq__q"><h3>Comment le consentement RGPD change-t-il les données GA4&nbsp;?</h3></summary><div class="jd-faq__a"><p>Quand un visiteur refuse les cookies de mesure, GA4 ne peut pas le suivre comme d'habitude. Avec le mode de consentement de Google, les balises s'adaptent au choix du visiteur et GA4 peut, sous conditions de volume, modéliser une partie des données manquantes. Il faut donc s'attendre à des chiffres inférieurs aux visites réelles, et documenter la configuration choisie avec la plateforme de consentement.</p></div></details><details class="jd-faq__item"><summary class="jd-faq__q"><h3>Pourquoi GA4, Google Ads et la Search Console n'affichent-ils pas les mêmes chiffres&nbsp;?</h3></summary><div class="jd-faq__a"><p>Parce qu'ils ne mesurent pas la même chose. La Search Console compte des clics dans les résultats de Google, GA4 des sessions sur le site, Google Ads des clics et des conversions selon son propre modèle d'attribution et sa propre fenêtre. Le consentement, les bloqueurs et les fuseaux horaires creusent encore les écarts. Un écart stable n'est pas une erreur&nbsp;; un écart qui change brutalement mérite un audit.</p></div></details><details class="jd-faq__item"><summary class="jd-faq__q"><h3>Faut-il connecter GA4 à BigQuery&nbsp;?</h3></summary><div class="jd-faq__a"><p>C'est utile dès qu'on veut conserver un historique long, croiser GA4 avec d'autres sources ou interroger les événements bruts en SQL. L'export est disponible dans les propriétés GA4 standards, avec des limites de volume pour l'export quotidien&nbsp;; le stockage et les requêtes relèvent de la facturation Google Cloud au-delà des quotas gratuits. Pour un petit site, les rapports de GA4 et Looker Studio suffisent souvent.</p></div></details></div></div></section>
+<section class="jd-section jd-section--line jd-section--tight" data-bloc="[VISUELS]"><div class="jd-container"><div class="jd-section__head"><h2 class="jd-h3">Visuels à fournir</h2></div><div class="jd-visuals"><figure class="jd-visual"><div class="jd-ph jd-ph--wide"><div><svg aria-hidden="true"><use href="#i-photo"/></svg><span class="jd-ph__title">Photo à fournir</span><span class="jd-ph__alt">Schéma d'un plan de marquage&nbsp;: événement GA4, déclencheur GTM et objectif associé</span></div></div></figure></div></div></section>
+<section class="jd-section jd-section--line jd-section--tight" data-bloc="[MAILLAGE]"><div class="jd-container"><div class="jd-section__head"><h2 class="jd-h3">Pour aller plus loin</h2></div><ul class="jd-links jd-links--2"><li class="jd-x-seo"><a href="../../../pages/expertises/consultant-seo/index.html">SEO <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li><li class="jd-x-sea"><a href="../../../pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li><li class="jd-x-geo"><a href="../../../pages/expertises/consultant-geo/index.html">GEO <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li><li><a href="../../../pages/blog/index.html">Data-driven SEO&nbsp;: utiliser Python pour automatiser vos analyses <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li></ul></div></section>
+<section class="jd-cta" data-bloc="[CTA]"><p class="jd-bgword" aria-hidden="true">Contact</p><div class="jd-container"><div class="jd-cta__inner"><h2 class="jd-h2">Une question sur votre tracking ou vos dashboards&nbsp;?</h2><p class="jd-lead">Un plan de marquage à relire, une migration vers GA4, une question sur BigQuery&nbsp;: écrivez-moi, j'échange volontiers sur ces sujets.</p><div class="jd-actions"><a class="jd-btn jd-btn--primary" href="../../../pages/contact/index.html">Échanger avec moi</a></div></div></div></section>
+</main>
+<!-- [FOOTER] Elementor&nbsp;: modèle Theme Builder «&nbsp;Pied de page&nbsp;»&nbsp;; conteneur (classe jd-footer) > conteneur grille 4 colonnes (jd-footer__grid). Colonne 1&nbsp;: Titre «&nbsp;JD.&nbsp;» + Éditeur de texte + Bouton (jd-btn--secondary) LinkedIn. Colonnes 2 à 4&nbsp;: Titre (jd-footer__title) + Liste d'icônes sans icône (jd-footer__list). Ligne basse&nbsp;: conteneur flex (jd-footer__bottom). -->
+<footer class="jd-footer" data-bloc="[FOOTER]">
+  <div class="jd-container">
+    <div class="jd-footer__grid">
+      <div class="jd-footer__id">
+        <a class="jd-logo" href="../../../pages/index.html" aria-label="Julien Dufour, accueil">JD<span>.</span></a>
+        <p>Julien Dufour, chef de projet digital augmenté par IA, à Rouen.</p>
+        <a class="jd-btn jd-btn--secondary" href="https://www.linkedin.com/in/julien-dufour76/" rel="me noopener">LinkedIn</a>
+      </div>
+      <nav aria-labelledby="ft-exp">
+        <p class="jd-footer__title" id="ft-exp">Expertises</p>
+        <ul class="jd-footer__list">
+          <li><a href="../../../pages/expertises/consultant-seo/index.html">SEO</a></li>
+          <li><a href="../../../pages/expertises/consultant-geo/index.html">GEO</a></li>
+          <li><a href="../../../pages/expertises/traffic-manager-sea/index.html">Google Ads et paid media</a></li>
+          <li><a href="../../../pages/expertises/expert-data/index.html">Tracking et data</a></li>
+          <li><a href="../../../pages/expertises/expert-marketing/index.html">Stratégie marketing digital</a></li>
+          <li><a href="../../../pages/expertises/chef-de-projet/index.html">Pilotage de projet et no-code</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="ft-res">
+        <p class="jd-footer__title" id="ft-res">Ressources</p>
+        <ul class="jd-footer__list">
+          <li><a href="../../../pages/blog/index.html">Articles</a></li>
+          <li><a href="../../../pages/a-propos/index.html">À propos</a></li>
+          <li><a href="../../../pages/contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="jd-footer__title">Contact</p>
+        <ul class="jd-footer__list">
+          <li><a href="mailto:contact@juliendufour.com">contact@juliendufour.com</a></li>
+          <li><a href="https://www.linkedin.com/in/julien-dufour76/" rel="me noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="jd-footer__bottom">
+      <ul class="jd-footer__legal">
+        <li><a href="../../../pages/mentions-legales/index.html">Mentions légales</a></li>
+        <li><a href="../../../pages/politique-de-confidentialite/index.html">Politique de confidentialité</a></li>
+      </ul>
+      <p class="jd-footer__copy">© 2026 Julien Dufour. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

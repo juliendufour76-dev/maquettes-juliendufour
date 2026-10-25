@@ -1,0 +1,322 @@
+/* ==========================================================================
+   jd-elementor.css : adaptation des composants jd-* aux enveloppes Elementor (Pro 3.2x, conteneurs flexbox)
+   Chargement dans le thème enfant, APRÈS jd.css (tokens + composants) :
+     wp_enqueue_style('jd', .../jd.css); wp_enqueue_style('jd-elementor', .../jd-elementor.css, ['jd', 'elementor-frontend']);
+   Principe : la classe jd-* est posée dans Avancé > Classes CSS du widget ou du conteneur.
+   Sur un conteneur, la classe est sur l'élément lui-même (.e-con.jd-skill) : les règles de jd.css s'appliquent telles quelles.
+   Sur un widget, elle est sur l'enveloppe (.elementor-widget.jd-xxx) : on cible l'élément interne ci-dessous.
+   Aucune couleur en dur : uniquement var(--jd-*).
+   ========================================================================== */
+
+/* 0. Réglages globaux ------------------------------------------------------ */
+body.elementor-page, body.elementor-default { background: var(--jd-surface); color: var(--jd-ink); }
+body:not(.elementor-editor-active) { overflow-x: clip; }
+.elementor-widget-text-editor p:last-child { margin-bottom: 0; }
+/* Largeur de contenu : 1280 px, marges 32 / 20 px (Réglages du site > Mise en page : 1280, padding des conteneurs 0) */
+.e-con.jd-container, .e-con-boxed.jd-section > .e-con-inner { max-width: var(--jd-container); padding-inline: var(--jd-section-x); }
+/* Le grain se pose sur le body par le thème enfant (body_class 'jd-grain') ; ne pas l'afficher dans l'éditeur */
+.elementor-editor-active.jd-grain::after { display: none; }
+/* Transition de page : fond #050505 (kit) */
+.e-page-transition { background-color: var(--jd-surface); }
+
+/* 1. Titres (widget Titre) : classe sur le widget -> style sur .elementor-heading-title */
+.jd-h1-xl .elementor-heading-title { font: var(--jd-text-h1-xl); letter-spacing: -.04em; color: var(--jd-ink); text-wrap: balance; }
+.jd-h1 .elementor-heading-title    { font: var(--jd-text-h1);    letter-spacing: -.04em; color: var(--jd-ink); text-wrap: balance; }
+.jd-h2 .elementor-heading-title    { font: var(--jd-text-h2);    letter-spacing: -.04em; color: var(--jd-ink); text-wrap: balance; }
+.jd-h3 .elementor-heading-title    { font: var(--jd-text-h3);    letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-h3-list .elementor-heading-title { font: var(--jd-text-h3-list); letter-spacing: -.02em; color: var(--jd-ink); }
+/* 2e ligne grise et mot vert : <span class="jd-alt"> / <span class="jd-accent"> dans le texte du titre */
+.elementor-heading-title .jd-alt { display: block; color: var(--jd-ink-title-alt); }
+.elementor-heading-title .jd-accent { color: var(--jd-brand); }
+
+/* Surtitres (widget Titre, balise p ou div) */
+.jd-eyebrow .elementor-heading-title {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font: var(--jd-text-label); letter-spacing: .2em; color: var(--jd-ink-subtle);
+}
+.elementor-widget.jd-eyebrow { display: block; }
+.jd-eyebrow--star .elementor-heading-title { color: var(--jd-brand); }
+.jd-eyebrow--star .elementor-heading-title::before {
+  content: ""; flex: none; width: 10px; height: 10px; background-color: var(--jd-brand);
+  -webkit-mask: var(--jd-mask-star) center / contain no-repeat; mask: var(--jd-mask-star) center / contain no-repeat;
+}
+.jd-eyebrow--num .elementor-heading-title, .jd-eyebrow--x .elementor-heading-title { text-transform: uppercase; letter-spacing: .3em; }
+.jd-eyebrow--x .elementor-heading-title .jd-eyebrow__x { color: var(--jd-x, var(--jd-brand)); }
+/* Annulation des styles de jd.css posés sur l'enveloppe du widget */
+.elementor-widget.jd-eyebrow--star::before { content: none; }
+
+/* Mot géant de fond (widget Titre, Position absolue, Attributs : aria-hidden|true) */
+.jd-bgword .elementor-heading-title { font: var(--jd-text-display); letter-spacing: -.05em; text-transform: uppercase; white-space: nowrap; color: var(--jd-ink); }
+.elementor-widget.jd-bgword { opacity: .04; pointer-events: none; user-select: none; z-index: 0; }
+
+/* 2. Texte (widget Éditeur de texte) */
+.jd-lead .elementor-widget-container, .jd-lead p { font: var(--jd-text-body); line-height: 1.7; color: var(--jd-ink-muted); max-width: 62ch; }
+.jd-text .elementor-widget-container, .jd-text p { color: var(--jd-ink-muted); max-width: 72ch; }
+.jd-text p + p, .jd-lead p + p { margin-top: var(--jd-space-4); }
+.jd-small .elementor-widget-container { font: var(--jd-text-small); color: var(--jd-ink-muted); }
+.elementor-widget-text-editor a:not(.jd-btn):not(.jd-link-arrow) {
+  color: var(--jd-ink); text-decoration: underline; text-decoration-color: var(--jd-brand-line);
+  text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color var(--jd-dur-fast);
+}
+.elementor-widget-text-editor a:not(.jd-btn):not(.jd-link-arrow):hover { color: var(--jd-brand); }
+
+/* 3. Boutons (widget Bouton) : classe jd-btn--primary / --secondary / --white sur le widget */
+.elementor-widget.jd-btn--primary, .elementor-widget.jd-btn--secondary, .elementor-widget.jd-btn--white {
+  /* l'enveloppe ne doit pas prendre le style du bouton */
+  display: block; min-height: 0; padding: 0; background: none; border: 0; font: inherit; letter-spacing: normal; text-transform: none;
+}
+.jd-btn--primary .elementor-button, .jd-btn--secondary .elementor-button, .jd-btn--white .elementor-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--jd-target); padding: 0 28px; border: 1px solid transparent; white-space: nowrap;
+  font: var(--jd-text-button); letter-spacing: .15em; text-transform: uppercase; fill: currentColor;
+  transition: background-color var(--jd-dur-fast), color var(--jd-dur-fast), border-color var(--jd-dur-fast);
+}
+.jd-btn--primary .elementor-button {
+  font: var(--jd-text-button-cta); letter-spacing: 0; text-transform: none; padding: 0 24px;
+  background: var(--jd-brand); color: var(--jd-on-brand); border-color: var(--jd-brand); border-radius: var(--jd-radius-pill);
+}
+.jd-btn--primary .elementor-button:hover, .jd-btn--primary .elementor-button:focus { background: var(--jd-ink); border-color: var(--jd-ink); color: var(--jd-on-brand); }
+.jd-btn--primary .elementor-button:focus-visible { outline: 3px solid var(--jd-focus-on-brand); outline-offset: 3px; }
+.jd-btn--secondary .elementor-button { background: transparent; color: var(--jd-ink); border-color: var(--jd-border-strong); border-radius: var(--jd-radius-pill); }
+.jd-btn--secondary .elementor-button:hover, .jd-btn--secondary .elementor-button:focus { background: var(--jd-brand); border-color: var(--jd-brand); color: var(--jd-on-brand); }
+.jd-btn--white .elementor-button { background: var(--jd-ink); color: var(--jd-on-brand); border-color: var(--jd-ink); border-radius: var(--jd-radius-0); }
+.jd-btn--white .elementor-button:hover, .jd-btn--white .elementor-button:focus { background: var(--jd-brand); border-color: var(--jd-brand); color: var(--jd-on-brand); }
+.jd-btn--block .elementor-button { width: 100%; }
+.jd-btn--primary .elementor-button .elementor-button-text, .jd-btn--secondary .elementor-button .elementor-button-text, .jd-btn--white .elementor-button .elementor-button-text { flex-grow: 0; }
+@media (max-width: 479px) { .jd-actions > .elementor-widget-button, .jd-actions > .elementor-widget-button .elementor-button { width: 100%; } }
+
+/* Lien fléché (widget Bouton, classe jd-link-arrow) */
+.elementor-widget.jd-link-arrow { display: block; min-height: 0; }
+.jd-link-arrow .elementor-button {
+  display: inline-flex; align-items: center; gap: 8px; min-height: var(--jd-target); padding: 0;
+  background: none; border: 0; font: 600 12px/1.2 var(--jd-font-mono); letter-spacing: .05em; color: var(--jd-x, var(--jd-brand));
+}
+.jd-link-arrow .elementor-button:hover { background: none; color: var(--jd-x, var(--jd-brand)); text-decoration: underline; text-underline-offset: 4px; }
+.jd-link-arrow .elementor-button-icon svg { width: 16px; height: 16px; transition: transform var(--jd-dur-fast); }
+.jd-link-arrow .elementor-button:hover .elementor-button-icon svg { transform: translateX(4px); }
+
+/* 4. En-tête (Theme Builder) -------------------------------------------------
+   Conteneur racine : classe jd-header, Position fixe (Avancé), Effets de mouvement > Collant : Haut + Effets de défilement (décalage 24 px).
+   Elementor ajoute .elementor-sticky--effects au défilement : même rendu que .is-scrolled. */
+.e-con.jd-header { --flex-wrap: nowrap; --gap: 12px; position: fixed; }
+.jd-header.elementor-sticky--effects {
+  background: var(--jd-surface-glass); border-color: var(--jd-border);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+}
+.elementor-editor-active .jd-header { position: relative; top: 0; left: 0; transform: none; margin: 12px auto; }
+/* Logo texte « JD. » (widget Titre, classe jd-logo, texte : JD<span>.</span>) */
+.jd-logo .elementor-heading-title { font: 700 16px/1 var(--jd-font-display); letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-logo .elementor-heading-title a { display: inline-flex; align-items: center; min-height: var(--jd-target); padding-inline: 4px; color: inherit; }
+.jd-logo .elementor-heading-title span { color: var(--jd-brand); }
+.elementor-widget.jd-logo { min-height: 0; padding: 0; }
+
+/* Menu (widget Menu / Nav Menu, classe jd-nav ; disposition horizontale, point d'arrêt tablette ; sous-menu au survol) */
+.elementor-widget.jd-nav { position: static; visibility: visible; opacity: 1; transform: none; padding: 0; background: none; border: 0; max-height: none; overflow: visible; }
+.jd-nav .elementor-nav-menu--main .elementor-item {
+  display: flex; align-items: center; gap: 10px; min-height: var(--jd-target); padding: 0 14px;
+  font: var(--jd-text-nav); color: var(--jd-ink-muted);
+}
+.jd-nav .elementor-nav-menu--main .elementor-item:hover, .jd-nav .elementor-nav-menu--main .elementor-item:focus { color: var(--jd-ink); }
+.jd-nav .elementor-nav-menu--main .elementor-item::after { display: none; } /* pas de soulignement Elementor */
+.jd-nav .elementor-item.elementor-item-active, .jd-nav .current-menu-ancestor > .elementor-item { color: var(--jd-ink); }
+.jd-nav .elementor-item.elementor-item-active::before, .jd-nav .current-menu-ancestor > .elementor-item::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--jd-brand); flex: none; opacity: 1; position: static;
+}
+.jd-nav .elementor-nav-menu--main .sub-menu {
+  min-width: 300px !important; padding: 10px; margin-top: 8px;
+  background: var(--jd-surface-raised); border: 1px solid var(--jd-border); border-radius: var(--jd-radius-2xl);
+}
+.jd-nav .elementor-nav-menu--main .sub-menu .elementor-sub-item {
+  display: flex; align-items: center; gap: 10px; min-height: var(--jd-target); padding: 0 16px; border-radius: 12px;
+  font: var(--jd-text-small); color: var(--jd-ink-muted); background: none;
+}
+.jd-nav .sub-menu .elementor-sub-item::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--jd-x, var(--jd-brand)); flex: none; }
+.jd-nav .sub-menu .elementor-sub-item:hover, .jd-nav .sub-menu .elementor-sub-item.elementor-item-active { color: var(--jd-ink); background: var(--jd-surface-hover); }
+/* couleur de puce par expertise : classe CSS de l'élément de menu (Apparence > Menus > Classes CSS) */
+.jd-nav .menu-item.jd-x-seo  { --jd-x: var(--jd-seo); }
+.jd-nav .menu-item.jd-x-geo  { --jd-x: var(--jd-geo); }
+.jd-nav .menu-item.jd-x-sea  { --jd-x: var(--jd-sea); }
+.jd-nav .menu-item.jd-x-data { --jd-x: var(--jd-data); }
+.jd-nav .menu-item.jd-x-mkt  { --jd-x: var(--jd-mkt); }
+.jd-nav .menu-item.jd-x-pm   { --jd-x: var(--jd-pm); }
+/* Bouton de menu mobile 48 x 48 */
+.jd-nav .elementor-menu-toggle {
+  width: var(--jd-target); height: var(--jd-target); padding: 0; border-radius: 50%;
+  background: transparent; color: var(--jd-ink); border: 1px solid var(--jd-border-strong); font-size: 20px;
+}
+.jd-nav .elementor-menu-toggle:hover, .jd-nav .elementor-menu-toggle.elementor-active { color: var(--jd-brand); border-color: var(--jd-brand); }
+/* Panneau mobile */
+.jd-nav .elementor-nav-menu--dropdown {
+  margin-top: 8px; padding: var(--jd-space-3); border-radius: var(--jd-radius-2xl);
+  background: var(--jd-surface-raised); border: 1px solid var(--jd-border);
+}
+.jd-nav .elementor-nav-menu--dropdown a { min-height: var(--jd-target); padding: 0 16px !important; border-radius: 12px; font: 400 15px/20px var(--jd-font-body); color: var(--jd-ink-muted); background: none; }
+.jd-nav .elementor-nav-menu--dropdown a:hover, .jd-nav .elementor-nav-menu--dropdown a.elementor-item-active { color: var(--jd-ink); background: var(--jd-surface-hover); }
+.jd-nav .elementor-nav-menu--dropdown .sub-menu { padding-left: 16px; }
+/* Bouton Contact : visible en mobile (ne pas cocher « Masquer sur mobile »).
+   Sur la page Contact il passe en contour (un seul primaire) : remplacer NNN par l'ID de la page /contact/ à l'étape 7. */
+body.page-id-NNN .jd-header__cta .elementor-button {
+  background: transparent; color: var(--jd-ink); border-color: var(--jd-border-strong);
+}
+
+/* 5. Fil d'Ariane (SEOPress : <ol class="breadcrumb"> / li.breadcrumb-item) */
+.jd-breadcrumb .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0 8px; margin: 0; padding: 0; list-style: none; }
+.jd-breadcrumb .breadcrumb-item { display: inline-flex; align-items: center; gap: 8px; font: var(--jd-text-meta); letter-spacing: .1em; color: var(--jd-ink-subtle); }
+.jd-breadcrumb .breadcrumb-item + .breadcrumb-item::before { content: "/"; padding: 0; color: inherit; }
+.jd-breadcrumb .breadcrumb-item a { display: inline-flex; align-items: center; min-height: 32px; color: var(--jd-ink-subtle); text-decoration: none; }
+.jd-breadcrumb .breadcrumb-item a:hover { color: var(--jd-ink); }
+.jd-breadcrumb .breadcrumb-item.active, .jd-breadcrumb [aria-current="page"] { color: var(--jd-ink-muted); }
+
+/* 6. Listes (widget Liste d'icônes, classe jd-list) : l'icône Elementor est masquée, l'étoile vient du CSS */
+.jd-list .elementor-icon-list-items { display: grid; gap: var(--jd-space-4); max-width: 72ch; }
+.jd-list .elementor-icon-list-item { position: relative; padding-left: 26px !important; margin: 0 !important; align-items: flex-start !important; }
+.jd-list .elementor-icon-list-item::before {
+  content: ""; position: absolute; left: 0; top: .5em; width: 10px; height: 10px; background-color: var(--jd-x, var(--jd-brand));
+  -webkit-mask: var(--jd-mask-star) center / contain no-repeat; mask: var(--jd-mask-star) center / contain no-repeat;
+}
+.elementor-widget.jd-list li::before { content: none; } /* neutralise la règle de jd.css sur l'enveloppe */
+.jd-list .elementor-icon-list-icon { display: none; }
+.jd-list .elementor-icon-list-text { font: var(--jd-text-body); color: var(--jd-ink-muted); padding: 0 !important; }
+.jd-list .elementor-icon-list-text strong { color: var(--jd-ink); }
+/* Liens du pied de page (Liste d'icônes sans icône, classe jd-footer__list) */
+.jd-footer__list .elementor-icon-list-item a { display: inline-flex; align-items: center; min-height: 40px; }
+.jd-footer__list .elementor-icon-list-text { font: var(--jd-text-small); color: var(--jd-ink-subtle); transition: color var(--jd-dur-fast); }
+.jd-footer__list .elementor-icon-list-item a:hover .elementor-icon-list-text { color: var(--jd-ink); }
+.jd-footer__list .elementor-icon-list-icon { display: none; }
+.jd-footer__title .elementor-heading-title { font: var(--jd-text-label); letter-spacing: .2em; text-transform: uppercase; color: var(--jd-ink-subtle); }
+/* Maillage (Liste d'icônes, classe jd-links, icône flèche à droite via « Position : après ») */
+.jd-links .elementor-icon-list-items { display: grid; border-top: 1px solid var(--jd-border); }
+.jd-links .elementor-icon-list-item a {
+  display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: var(--jd-space-4);
+  min-height: 64px; padding: 12px 0; border-bottom: 1px solid var(--jd-border);
+}
+.jd-links .elementor-icon-list-text { font: var(--jd-text-h3-list); letter-spacing: -.02em; color: var(--jd-ink); transition: color var(--jd-dur-fast); }
+.jd-links .elementor-icon-list-icon svg { width: 18px; height: 18px; fill: var(--jd-x, var(--jd-brand)); }
+.jd-links .elementor-icon-list-item a:hover .elementor-icon-list-text { color: var(--jd-brand); }
+@media (min-width: 768px) { .jd-links--2 .elementor-icon-list-items { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--jd-gutter); } }
+
+/* 7. Cartes (conteneurs) : la classe est sur le conteneur, seuls les widgets internes sont ciblés */
+.jd-skill .jd-skill__title .elementor-heading-title { font: var(--jd-text-h3); letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-skill .jd-skill__num .elementor-heading-title { font: var(--jd-text-meta); letter-spacing: .1em; color: var(--jd-ink-muted); }
+.jd-skill .jd-skill__mark .elementor-heading-title { font: 700 clamp(88px, 10vw, 132px)/.85 var(--jd-font-display); letter-spacing: -.06em; color: var(--jd-x, var(--jd-brand)); }
+.jd-skill .elementor-widget.jd-skill__mark { position: absolute; z-index: -1; right: -.04em; top: 10px; opacity: .14; transition: opacity var(--jd-dur-slow); pointer-events: none; }
+.jd-skill:hover .elementor-widget.jd-skill__mark, .jd-skill:focus-within .elementor-widget.jd-skill__mark { opacity: .28; }
+.jd-skill .elementor-widget.jd-skill__num { position: absolute; top: 18px; left: clamp(20px, 2.4vw, 28px); }
+.jd-skill .jd-skill__text .elementor-widget-container { font: var(--jd-text-small); color: var(--jd-ink-muted); }
+/* Conteneur-lien (Conteneur > Lien) : toute la carte est un <a> ; sinon pseudo-élément sur le lien fléché */
+a.e-con.jd-skill, a.e-con.jd-post { text-decoration: none; color: inherit; }
+.jd-skill .jd-link-arrow .elementor-button::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.jd-skill .jd-link-arrow .elementor-button:focus-visible { outline: none; }
+.jd-skill:has(.jd-link-arrow .elementor-button:focus-visible) { outline: 3px solid var(--jd-focus); outline-offset: 3px; }
+/* Étapes : carrousel imbriqué (Nested Carousel) ou conteneur défilant */
+.jd-rail-wrap .swiper-slide { height: auto; }
+.jd-rail-wrap .elementor-swiper-button {
+  display: inline-grid; place-items: center; width: var(--jd-target); height: var(--jd-target); border-radius: 50%;
+  background: var(--jd-surface-glass); color: var(--jd-ink); border: 1px solid var(--jd-border-strong); font-size: 18px;
+}
+.jd-rail-wrap .elementor-swiper-button:hover { border-color: var(--jd-brand); color: var(--jd-brand); }
+.jd-rail-wrap .elementor-swiper-button svg { fill: currentColor; width: 18px; height: 18px; }
+.jd-rail-wrap .swiper-button-disabled { opacity: .4; }
+.jd-step .jd-step__title .elementor-heading-title { font: 700 18px/1.2 var(--jd-font-display); letter-spacing: -.01em; color: var(--jd-ink); }
+.jd-step .jd-step__text .elementor-widget-container { font: var(--jd-text-small); color: var(--jd-ink-muted); }
+.jd-step .elementor-widget-icon.jd-step__icon .elementor-icon {
+  display: grid; place-items: center; width: 46px; height: 46px; padding: 0; font-size: 20px;
+  border-radius: 50%; background: var(--jd-surface-hover); border: 1px solid var(--jd-border); color: var(--jd-brand); fill: var(--jd-brand);
+}
+.jd-step .elementor-widget.jd-step__icon { width: auto; height: auto; background: none; border: 0; margin-bottom: 28px; }
+/* Lignes d'expérience */
+.jd-exp__row .jd-exp__title .elementor-heading-title { font: var(--jd-text-h3-list); letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-exp__row .jd-exp__org .elementor-heading-title, .jd-exp__row .jd-exp__date .elementor-heading-title { font: var(--jd-text-meta); letter-spacing: .02em; color: var(--jd-ink-muted); }
+.jd-exp__row .jd-exp__place .elementor-heading-title { font: 400 11px/1.4 var(--jd-font-mono); color: var(--jd-ink-subtle); }
+/* Chiffres clés */
+.jd-stat .jd-stat__value .elementor-heading-title { font: var(--jd-text-stat); letter-spacing: -.04em; color: var(--jd-x, var(--jd-brand)); }
+.jd-stat--text .jd-stat__value .elementor-heading-title { font: var(--jd-text-h3); letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-stat .jd-stat__label .elementor-heading-title { font: var(--jd-text-meta); letter-spacing: .05em; color: var(--jd-ink-muted); }
+.jd-stat .jd-stat__ctx .elementor-heading-title { font: var(--jd-text-meta); letter-spacing: .05em; color: var(--jd-ink-subtle); }
+.jd-stats.e-grid { --gap: 1px; }
+
+/* 8. Articles : Grille de boucle (Loop Grid, classe jd-posts) + modèle de boucle « Carte article » (conteneur jd-post) */
+.jd-posts .elementor-loop-container { gap: var(--jd-gutter) !important; }
+.elementor-widget.jd-posts { display: block; }
+.jd-post .elementor-widget-theme-post-title .elementor-heading-title { font: var(--jd-text-h3-list); letter-spacing: -.02em; color: var(--jd-ink); }
+.jd-post .elementor-widget-theme-post-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.jd-post .elementor-widget-theme-post-title a:focus-visible { outline: none; }
+.jd-post:has(.elementor-widget-theme-post-title a:focus-visible) { outline: 3px solid var(--jd-focus); outline-offset: 3px; }
+.jd-post .elementor-widget-post-info .elementor-icon-list-text { font: 400 11px/1.4 var(--jd-font-mono); letter-spacing: .1em; color: var(--jd-ink-subtle); }
+.jd-post .elementor-widget-theme-post-excerpt .elementor-widget-container { font: var(--jd-text-small); color: var(--jd-ink-muted); }
+.jd-post .jd-cat .elementor-post-info__terms-list-item, .jd-post .jd-cat a { position: relative; z-index: 2; }
+.jd-posts .elementor-pagination .page-numbers { display: inline-grid; place-items: center; min-width: var(--jd-target); min-height: var(--jd-target); font: var(--jd-text-meta); color: var(--jd-ink-muted); border: 1px solid var(--jd-border); }
+.jd-posts .elementor-pagination .page-numbers.current { color: var(--jd-on-brand); background: var(--jd-brand); border-color: var(--jd-brand); }
+
+/* 9. FAQ : Accordéon imbriqué (Nested Accordion, classe jd-faq ; balise de titre H3 ; icônes laissées vides) */
+.jd-faq .e-n-accordion { border-top: 1px solid var(--jd-border); }
+.jd-faq .e-n-accordion-item { border-bottom: 1px solid var(--jd-border); }
+.jd-faq .e-n-accordion-item-title {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--jd-space-6);
+  min-height: 72px; padding: 20px 0; background: none; border: 0; cursor: pointer;
+}
+.jd-faq .e-n-accordion-item-title-text { font: var(--jd-text-h3-list); letter-spacing: -.02em; color: var(--jd-ink); transition: color var(--jd-dur-fast); }
+.jd-faq .e-n-accordion-item-title:hover .e-n-accordion-item-title-text { color: var(--jd-brand); }
+.jd-faq .e-n-accordion-item-title-icon { display: none; }
+.jd-faq .e-n-accordion-item-title::after {
+  content: ""; flex: none; width: 20px; height: 20px; background-color: var(--jd-x, var(--jd-brand));
+  -webkit-mask: var(--jd-mask-plus) center / contain no-repeat; mask: var(--jd-mask-plus) center / contain no-repeat;
+  transition: transform var(--jd-dur) var(--jd-ease);
+}
+.jd-faq .e-n-accordion-item[open] > .e-n-accordion-item-title::after { transform: rotate(45deg); }
+.jd-faq .e-n-accordion-item > .e-con { padding: 0 0 24px; background: none; border: 0; }
+.jd-faq .e-n-accordion-item > .e-con .elementor-widget-text-editor { color: var(--jd-ink-muted); max-width: 72ch; }
+
+/* 10. Formulaire (widget Formulaire Elementor Pro, classe jd-form sur le widget) */
+.elementor-widget.jd-form { display: block; }
+.jd-form .elementor-form-fields-wrapper { margin: 0 calc(var(--jd-gutter) / -2) calc(-1 * var(--jd-space-6)); }
+.jd-form .elementor-field-group { padding: 0 calc(var(--jd-gutter) / 2); margin-bottom: var(--jd-space-6); align-items: flex-start; }
+.jd-form .elementor-field-label { font: 400 11px/1.4 var(--jd-font-mono); letter-spacing: .15em; text-transform: uppercase; color: var(--jd-ink-subtle); margin-bottom: 6px; }
+.jd-form .elementor-mark-required .elementor-field-label::after { color: var(--jd-ink-muted); }
+.jd-form .elementor-field-textual, .jd-form .elementor-field-textual:focus {
+  min-height: var(--jd-target); padding: 12px 0; background: transparent; color: var(--jd-ink);
+  font: 400 15px/1.5 var(--jd-font-body); border: 0; border-bottom: 1px solid var(--jd-border-strong); border-radius: 0; box-shadow: none;
+}
+.jd-form .elementor-field-textual:hover { border-bottom-color: var(--jd-ink-muted); }
+.jd-form .elementor-field-textual:focus { border-bottom-color: var(--jd-brand); }
+.jd-form .elementor-field-textual::placeholder { color: var(--jd-ink-subtle); opacity: 1; }
+.jd-form textarea.elementor-field-textual { min-height: 148px; resize: vertical; }
+.jd-form .elementor-select-wrapper select { padding-right: 32px; }
+.jd-form .elementor-select-wrapper select option { background: var(--jd-surface-raised); color: var(--jd-ink); }
+.jd-form .elementor-select-wrapper .select-caret-down-wrapper { color: var(--jd-ink); fill: var(--jd-ink); right: 4px; }
+.jd-form .elementor-field-type-acceptance .elementor-field-subgroup .elementor-field-option { display: flex; align-items: flex-start; gap: 12px; min-height: var(--jd-target); }
+.jd-form .elementor-field-type-acceptance input[type="checkbox"] { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--jd-brand); }
+.jd-form .elementor-field-type-acceptance label { font: var(--jd-text-small); color: var(--jd-ink-muted); text-transform: none; letter-spacing: 0; }
+.jd-form .elementor-field-type-acceptance a { color: var(--jd-ink); text-decoration: underline; text-decoration-color: var(--jd-brand-line); text-underline-offset: 3px; }
+/* Erreurs : Elementor ajoute .elementor-error sur le groupe et un <span class="elementor-message elementor-message-danger elementor-help-inline"> */
+.jd-form .elementor-error .elementor-field-textual { border-bottom-color: var(--jd-danger); }
+.jd-form .elementor-error .elementor-field-label { color: var(--jd-danger); }
+.jd-form .elementor-field-group .elementor-message-danger, .jd-form .elementor-field-group .elementor-help-inline {
+  display: flex; gap: 8px; margin-top: 6px; font: 400 13px/1.4 var(--jd-font-body); color: var(--jd-danger);
+}
+.jd-form .elementor-field-group .elementor-message-danger::before { content: "!"; flex: none; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; border: 1px solid currentColor; font: 700 10px/1 var(--jd-font-mono); }
+/* Messages après envoi */
+.jd-form .elementor-message { margin-top: var(--jd-space-4); padding: 20px 24px; border: 1px solid var(--jd-border); font: var(--jd-text-body); }
+.jd-form .elementor-message::before { content: none; }
+.jd-form .elementor-message-success { border-color: var(--jd-brand-line); background: var(--jd-brand-tint); color: var(--jd-ink); }
+.jd-form > .elementor-widget-container > .elementor-form > .elementor-message-danger, .jd-form .elementor-form > .elementor-message-danger { border-color: var(--jd-danger); color: var(--jd-ink); }
+/* Bouton d'envoi : style blanc, mono 600, 48 px, 100 % */
+.jd-form .elementor-field-type-submit .elementor-button {
+  width: 100%; min-height: var(--jd-target); padding: 0 28px; border: 1px solid var(--jd-ink); border-radius: var(--jd-radius-0);
+  background: var(--jd-ink); color: var(--jd-on-brand); font: var(--jd-text-button); letter-spacing: .15em; text-transform: uppercase;
+  transition: background-color var(--jd-dur-fast), border-color var(--jd-dur-fast);
+}
+.jd-form .elementor-field-type-submit .elementor-button:hover, .jd-form .elementor-field-type-submit .elementor-button:focus { background: var(--jd-brand); border-color: var(--jd-brand); color: var(--jd-on-brand); }
+.jd-form .elementor-field-type-submit .elementor-button[disabled] { opacity: .5; cursor: progress; }
+.jd-form .elementor-field-type-submit .elementor-button.elementor-form-spinner { cursor: progress; }
+
+/* 11. Badge rotatif et bandeau d'outils (widget HTML : coller le HTML des maquettes tel quel) */
+.elementor-widget-html.jd-badge-ring { position: absolute; width: auto; border: 0; background: none; }
+.elementor-widget-html.jd-marquee-wrap { overflow: hidden; }
+
+/* 12. Pied de page */
+.jd-footer .jd-footer__copy .elementor-heading-title, .jd-footer .jd-footer__copy p { font: var(--jd-text-meta); letter-spacing: .05em; color: var(--jd-ink-subtle); }
+.jd-footer .jd-footer__id .elementor-widget-text-editor { font: var(--jd-text-small); color: var(--jd-ink-subtle); }
+
+/* 13. Portrait (widget Image, classe jd-portrait) : l'image remplit le cadre 1/1,15 */
+.elementor-widget-image.jd-portrait .elementor-widget-container, .elementor-widget-image.jd-portrait img { width: 100%; height: 100%; object-fit: cover; }
