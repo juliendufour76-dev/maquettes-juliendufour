@@ -839,6 +839,34 @@ a.jd-cat:hover { background: var(--jd-brand-tint); }
 @media (min-width: 768px) { .jd-tools__row { grid-template-columns: 220px minmax(0, 1fr); gap: var(--jd-space-6); } }
 
 
+/* Bandeau de réassurance défilant (ex-bandeau d'outils de l'accueil actuel) : une ligne, défilement continu.
+   La liste lue par les lecteurs d'écran est .jd-visually-hidden ; la piste animée est aria-hidden.
+   Couleur d'expertise (--jd-x, posée par jd-x-* sur body ou la section) : étoile devant chaque pastille et filet haut. */
+.jd-band { position: relative; overflow: hidden; border-block: 1px solid var(--jd-border); background: var(--jd-surface-sunken); padding-block: 20px; }
+.jd-band::before { content: ""; position: absolute; left: 0; top: -1px; width: 96px; height: 1px; background: var(--jd-x, var(--jd-brand)); }
+.jd-band .jd-marquee-track { animation-duration: var(--jd-band-dur, 40s); }
+.jd-band:hover .jd-marquee-track { animation-play-state: paused; }
+.jd-band__list { display: flex; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.jd-band__list li {
+  flex: none; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+  font: 600 12px/1 var(--jd-font-mono); letter-spacing: .03em; color: var(--jd-ink);
+  padding: 15px 22px; border: 1px solid var(--jd-border); border-radius: var(--jd-radius-pill);
+}
+.jd-band__list li::before {
+  content: ""; flex: none; width: 8px; height: 8px; background-color: var(--jd-x, var(--jd-brand));
+  -webkit-mask: var(--jd-mask-star) center / contain no-repeat; mask: var(--jd-mask-star) center / contain no-repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  .jd-band .jd-marquee-track { animation: none !important; transform: none !important; width: auto; flex-wrap: wrap; padding-inline: var(--jd-section-x); }
+  .jd-band .jd-band__list + .jd-band__list, .jd-band .jd-band__rep { display: none; }
+  .jd-band .jd-band__list { flex-wrap: wrap; }
+}
+/* Visuels manquants : encadré compact, texte seulement */
+.jd-visuals-note { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding: 14px 18px; border: 1px dashed var(--jd-border-strong); border-radius: var(--jd-radius-sm); font: var(--jd-text-small); color: var(--jd-ink-subtle); }
+.jd-visuals-note__label { font: var(--jd-text-label); letter-spacing: .2em; text-transform: uppercase; color: var(--jd-sea); }
+.jd-visuals-note ul { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; padding: 0; list-style: none; }
+.jd-visuals-note li::before { content: "· "; }
+
 /* 6. ANNOTATIONS DE MAQUETTE (ne partent pas en production) --------------- */
 .jd-todo {
   color: var(--jd-sea); border: 1px dashed var(--jd-sea); border-radius: var(--jd-radius-xs);
